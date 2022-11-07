@@ -5,6 +5,7 @@ theme:
   name: material
 nav:
   - Installation: index.md
+  - Config Options: config-options.md
 
 markdown_extensions:
   - admonition
