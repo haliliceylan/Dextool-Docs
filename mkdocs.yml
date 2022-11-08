@@ -6,6 +6,7 @@ theme:
 nav:
   - Installation: index.md
   - Config Options: config-options.md
+  - Apply Mutation Testing: apply-mutation-testing.md
 
 markdown_extensions:
   - admonition
