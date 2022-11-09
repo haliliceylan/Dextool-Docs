@@ -9,17 +9,18 @@ natively (cmake) while others can be inspected with
 
 You can follow the instruction below 
 
-## GoogleTest
+## GoogleTest Example
 
 [Google Test project](https://github.com/google/googletest) is used as an example.
 
-Obtain the project you want to analyze:
+### Obtain the project you want to analyze
 ```sh
 git clone https://github.com/google/googletest.git
 cd googletest
 ```
+<script id="asciicast-536112" src="https://asciinema.org/a/536112.js" async data-i="1" data-cols="80" data-rows="15"></script>
 
-Generate a JSON compilation database for the project:
+### Generate a JSON compilation database for the project
 ```sh
 mkdir build
 pushd build
@@ -27,13 +28,15 @@ cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -Dgtest_build_tests=ON -Dgmock_build_te
 make
 popd
 ```
+<script id="asciicast-536115" src="https://asciinema.org/a/536115.js" async data-i="1" data-cols="80" data-rows="15"></script>
 
-Create a configuration file:
+### Create a configuration file
 ```sh
 dextool mutate admin --init
 ```
-The file should be pretty self explaining.
+<script id="asciicast-536116" src="https://asciinema.org/a/536116.js" async data-i="1" data-cols="80" data-rows="15"></script>
 
+The file should be pretty self explaining.
 Open the config file and change the following fields:
 ```toml
 [workarea]
@@ -51,11 +54,13 @@ test_cmd = "./test.sh"
 build_cmd = "./build.sh"
 analyze_using_builtin = ["gtest"]
 ```
+<script id="asciicast-536117" src="https://asciinema.org/a/536117.js" async data-i="1" data-cols="80" data-rows="15"></script>
 
-Generate a database of containing the mutants:
+### Generate a database of containing the mutants
 ```sh
 dextool mutate analyze
 ```
+<script id="asciicast-536120" src="https://asciinema.org/a/536120.js" async data-i="1" data-cols="80" data-rows="15"></script>
 
 Create a file `build.sh` that will build the subject under test when invoked:
 ```sh
@@ -64,6 +69,7 @@ set -e
 cd build
 make -j$(nproc)
 ```
+<script id="asciicast-536121" src="https://asciinema.org/a/536121.js" async data-i="1" data-cols="80" data-rows="15"></script>
 
 Create a file `test.sh` that will run the entire test suite when invoked:
 ```sh
@@ -72,13 +78,16 @@ set -e
 cd build
 ctest --output-on-failure
 ```
+<script id="asciicast-536123" src="https://asciinema.org/a/536123.js" async data-i="1" data-cols="80" data-rows="15"></script>
 
 Make the files executable so they can be used by dextool:
 ```sh
 chmod 755 build.sh test.sh
 ```
+<script id="asciicast-536124" src="https://asciinema.org/a/536124.js" async data-i="1" data-cols="80" data-rows="15"></script>
 
-Run the mutation testing on the LCR mutants:
+### Run the mutation testing on the LCR mutants
 ```sh
 dextool mutate test
 ```
+
